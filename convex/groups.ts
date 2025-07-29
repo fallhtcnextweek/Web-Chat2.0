@@ -49,7 +49,7 @@ export const addMemberToGroup = mutation({
       .first();
 
     if (!membership || membership.role !== "admin") {
-      throw new Error("Only admins can add members");
+      throw new Error("Только админ может добавить пользователей");
     }
 
     // Check if user is already a member
@@ -61,7 +61,7 @@ export const addMemberToGroup = mutation({
       .first();
 
     if (existingMembership) {
-      throw new Error("User is already a member");
+      throw new Error("Этот пользователь уже участник группы");
     }
 
     // Check if the user being added is a friend
@@ -79,7 +79,7 @@ export const addMemberToGroup = mutation({
       .first();
 
     if (!friendship) {
-      throw new Error("Can only add friends to groups");
+      throw new Error("Можно добавить только друзей");
     }
 
     await ctx.db.insert("groupMembers", {

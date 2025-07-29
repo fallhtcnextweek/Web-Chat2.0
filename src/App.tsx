@@ -12,7 +12,7 @@ export default function App() {
     <ThemeProvider>
       <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
         <header className="sticky top-0 z-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm h-16 flex justify-between items-center border-b border-gray-200 dark:border-gray-700 shadow-sm px-4">
-          <h2 className="text-xl font-semibold text-primary dark:text-blue-400">Chat App</h2>
+          <h2 className="text-xl font-semibold text-primary dark:text-blue-400">ТопЧат</h2>
           <div className="flex items-center space-x-3">
             <ThemeToggle />
             <Authenticated>
@@ -49,8 +49,8 @@ function Content() {
         <div className="flex items-center justify-center h-full">
           <div className="w-full max-w-md mx-auto p-8">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-primary dark:text-blue-400 mb-4">Welcome to Chat</h1>
-              <p className="text-xl text-secondary dark:text-gray-300">Sign in to start chatting</p>
+              <h1 className="text-3xl font-bold text-primary dark:text-blue-400 mb-4">Добро Пожаловать!</h1>
+              <p className="text-xl text-secondary dark:text-gray-300">Войдите в аккаунт чтобы начать</p>
             </div>
             <SignInForm />
           </div>

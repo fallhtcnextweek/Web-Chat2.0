@@ -64,8 +64,8 @@ export function ChatApp() {
         ) : (
           <div className="flex-1 flex items-center justify-center text-gray-500 dark:text-gray-400">
             <div className="text-center">
-              <h2 className="text-2xl font-semibold mb-2">Welcome to Chat</h2>
-              <p>Select a conversation to start chatting</p>
+              <h2 className="text-2xl font-semibold mb-2">Добро Пожаловать!</h2>
+              <p>выберите переписку чтобы начать</p>
             </div>
           </div>
         )}

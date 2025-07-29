@@ -53,7 +53,7 @@ export function Sidebar({ activeChat, setActiveChat, onShowUserManagement, onSho
     <div className="w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Chats</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Чаты</h2>
           <div className="flex space-x-2">
             <button
               onClick={onShowProfileSetup}
@@ -66,7 +66,7 @@ export function Sidebar({ activeChat, setActiveChat, onShowUserManagement, onSho
               onClick={onShowUserManagement}
               className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
             >
-              Users
+              Найти
             </button>
           </div>
         </div>
@@ -99,14 +99,14 @@ export function Sidebar({ activeChat, setActiveChat, onShowUserManagement, onSho
           onClick={() => setShowCreateGroup(!showCreateGroup)}
           className="w-full px-3 py-2 text-sm bg-green-500 text-white rounded hover:bg-green-600"
         >
-          {showCreateGroup ? "Cancel" : "Create Group"}
+          {showCreateGroup ? "Отмена" : "Создать группу"}
         </button>
 
         {showCreateGroup && (
           <form onSubmit={handleCreateGroup} className="mt-3 space-y-2">
             <input
               type="text"
-              placeholder="Group name"
+              placeholder="Название"
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -114,7 +114,7 @@ export function Sidebar({ activeChat, setActiveChat, onShowUserManagement, onSho
             />
             <input
               type="text"
-              placeholder="Description (optional)"
+              placeholder="Описание(необязательно)"
               value={groupDescription}
               onChange={(e) => setGroupDescription(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -123,7 +123,7 @@ export function Sidebar({ activeChat, setActiveChat, onShowUserManagement, onSho
               type="submit"
               className="w-full px-3 py-2 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
             >
-              Create
+              Создать
             </button>
           </form>
         )}
@@ -131,7 +131,7 @@ export function Sidebar({ activeChat, setActiveChat, onShowUserManagement, onSho
 
       <div className="flex-1 overflow-y-auto">
         <div className="p-4">
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Groups</h3>
+          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Группы</h3>
           <div className="space-y-1">
             {groups.filter((group): group is NonNullable<typeof group> => group !== null).map((group) => (
               <div key={group._id} className="group relative">
@@ -150,7 +150,7 @@ export function Sidebar({ activeChat, setActiveChat, onShowUserManagement, onSho
                   <div className="font-medium">{group.name}</div>
                   <div className="text-xs text-gray-500 dark:text-gray-400 flex justify-between">
                     <span>{group.description && group.description.length > 20 ? group.description.substring(0, 20) + "..." : group.description}</span>
-                    <span>{group.memberCount} members</span>
+                    <span>{group.memberCount} участники</span>
                   </div>
                 </button>
                 <button
@@ -165,7 +165,7 @@ export function Sidebar({ activeChat, setActiveChat, onShowUserManagement, onSho
         </div>
 
         <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Friends</h3>
+          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Друзья</h3>
           <div className="space-y-1">
             {friends.filter((friend): friend is NonNullable<typeof friend> => friend !== null).map((friend) => (
               <button
@@ -173,7 +173,7 @@ export function Sidebar({ activeChat, setActiveChat, onShowUserManagement, onSho
                 onClick={() => setActiveChat({
                   type: "direct",
                   id: friend._id,
-                  name: friend.nickname || friend.name || friend.email || "Unknown",
+                  name: friend.nickname || friend.name || friend.email || "ноунейм",
                 })}
                 className={`w-full text-left px-3 py-2 rounded text-sm flex items-center space-x-2 ${
                   activeChat?.type === "direct" && activeChat.id === friend._id

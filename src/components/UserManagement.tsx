@@ -57,7 +57,7 @@ export function UserManagement({ onClose }: UserManagementProps) {
     <div className="flex flex-col h-full bg-white dark:bg-gray-900">
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">User Management</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Список пользователей</h2>
           <button
             onClick={onClose}
             className="px-3 py-1 text-sm bg-gray-500 text-white rounded hover:bg-gray-600"
@@ -75,7 +75,7 @@ export function UserManagement({ onClose }: UserManagementProps) {
                 : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
             }`}
           >
-            Search Users
+            Поиск Пользователей
           </button>
           <button
             onClick={() => setActiveTab("friends")}
@@ -85,7 +85,7 @@ export function UserManagement({ onClose }: UserManagementProps) {
                 : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
             }`}
           >
-            Friends ({friends.length})
+            Друзья ({friends.length})
           </button>
           <button
             onClick={() => setActiveTab("requests")}
@@ -95,14 +95,14 @@ export function UserManagement({ onClose }: UserManagementProps) {
                 : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
             }`}
           >
-            Requests ({pendingRequests.length})
+            Заявки ({pendingRequests.length})
           </button>
         </div>
 
         {activeTab === "search" && (
           <input
             type="text"
-            placeholder="Search by nickname..."
+            placeholder="Введите никнейм..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
@@ -137,20 +137,20 @@ export function UserManagement({ onClose }: UserManagementProps) {
                     onClick={() => handleSendFriendRequest(user._id)}
                     className="px-3 py-1 text-sm bg-green-500 text-white rounded hover:bg-green-600"
                   >
-                    Add Friend
+                    Добавить в друзья
                   </button>
                   <button
                     onClick={() => handleBlockUser(user._id)}
                     className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
                   >
-                    Block
+                    Заблокировать
                   </button>
                 </div>
               </div>
             ))}
             {searchQuery.trim() && searchResults.length === 0 && (
               <div className="text-center text-gray-500 dark:text-gray-400 py-8">
-                No users found
+                Ничего не найдено
               </div>
             )}
           </div>
@@ -181,13 +181,13 @@ export function UserManagement({ onClose }: UserManagementProps) {
                   onClick={() => handleBlockUser(friend._id)}
                   className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
                 >
-                  Block
+                  Заблокировать
                 </button>
               </div>
             ))}
             {friends.length === 0 && (
               <div className="text-center text-gray-500 dark:text-gray-400 py-8">
-                No friends yet
+                Пока нет друзей
               </div>
             )}
           </div>
@@ -219,20 +219,20 @@ export function UserManagement({ onClose }: UserManagementProps) {
                     onClick={() => handleRespondToRequest(request._id, true)}
                     className="px-3 py-1 text-sm bg-green-500 text-white rounded hover:bg-green-600"
                   >
-                    Accept
+                    Принять
                   </button>
                   <button
                     onClick={() => handleRespondToRequest(request._id, false)}
                     className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
                   >
-                    Reject
+                    Отклонить
                   </button>
                 </div>
               </div>
             ))}
             {pendingRequests.length === 0 && (
               <div className="text-center text-gray-500 dark:text-gray-400 py-8">
-                No pending requests
+                Пока нет заявок
               </div>
             )}
           </div>

@@ -19,16 +19,16 @@ export function ProfileSetup({ onClose }: ProfileSetupProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!nickname.trim()) {
-      toast.error("Nickname is required");
+      toast.error("Нужен никнейм");
       return;
     }
 
     try {
       await updateProfile({ nickname: nickname.trim() });
-      toast.success("Profile updated successfully!");
+      toast.success("Профиль обновлен успешно!");
       onClose();
     } catch (error) {
-      toast.error("Failed to update profile");
+      toast.error("ошибка обновления профиля");
     }
   };
 
@@ -38,12 +38,12 @@ export function ProfileSetup({ onClose }: ProfileSetupProps) {
 
     const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
     if (!allowedTypes.includes(file.type)) {
-      toast.error("Only JPEG and PNG files are allowed");
+      toast.error("только JPEG и PNG");
       return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      toast.error("File size must be less than 5MB");
+      toast.error("файл не должен превышать 5MB");
       return;
     }
 
@@ -58,14 +58,14 @@ export function ProfileSetup({ onClose }: ProfileSetupProps) {
       });
 
       if (!result.ok) {
-        throw new Error("Upload failed");
+        throw new Error("Ошибка загрузки");
       }
 
       const { storageId } = await result.json();
       await updateProfile({ profilePhotoId: storageId });
-      toast.success("Profile photo updated!");
+      toast.success("Обновлено фото профиля!");
     } catch (error) {
-      toast.error("Failed to upload photo");
+      toast.error("Не удалось обновить фото профиля");
     } finally {
       setUploading(false);
     }
@@ -77,7 +77,7 @@ export function ProfileSetup({ onClose }: ProfileSetupProps) {
     <div className="flex flex-col h-full bg-white dark:bg-gray-900">
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Profile Setup</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Настройки Профиля</h2>
           <button
             onClick={onClose}
             className="px-3 py-1 text-sm bg-gray-500 text-white rounded hover:bg-gray-600"
@@ -121,13 +121,13 @@ export function ProfileSetup({ onClose }: ProfileSetupProps) {
             />
             
             {uploading && (
-              <div className="text-sm text-gray-500 dark:text-gray-400">Uploading...</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Загрузка...</div>
             )}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Nickname *
+              Никнейм 
             </label>
             <input
               type="text"
@@ -155,7 +155,7 @@ export function ProfileSetup({ onClose }: ProfileSetupProps) {
             type="submit"
             className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-medium"
           >
-            Update Profile
+            Обновить Профиль
           </button>
         </form>
       </div>

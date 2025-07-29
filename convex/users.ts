@@ -127,11 +127,11 @@ export const respondToFriendRequest = mutation({
   },
   handler: async (ctx, args) => {
     const userId = await getAuthUserId(ctx);
-    if (!userId) throw new Error("Not authenticated");
+    if (!userId) throw new Error("Не авторизован");
 
     const relationship = await ctx.db.get(args.relationshipId);
     if (!relationship || relationship.targetUserId !== userId) {
-      throw new Error("Invalid request");
+      throw new Error("Ошибка отправки заяввки");
     }
 
     if (args.accept) {
@@ -154,7 +154,7 @@ export const blockUser = mutation({
   args: { targetUserId: v.id("users") },
   handler: async (ctx, args) => {
     const userId = await getAuthUserId(ctx);
-    if (!userId) throw new Error("Not authenticated");
+    if (!userId) throw new Error("Не авторизован");
 
     // Remove any existing friend relationship
     const existingFriend = await ctx.db

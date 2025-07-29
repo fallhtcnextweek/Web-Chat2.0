@@ -28,28 +28,28 @@ export function GroupManagement({ groupId, groupName, onClose }: GroupManagement
   const handleAddMember = async (userId: Id<"users">) => {
     try {
       await addMember({ groupId, userId });
-      toast.success("Member added successfully!");
+      toast.success("Пользователь добавлен успешно!");
     } catch (error) {
-      toast.error("Failed to add member");
+      toast.error("Ошибка добавки пользователя");
     }
   };
 
   const handleRemoveMember = async (userId: Id<"users">) => {
     try {
       await removeMember({ groupId, userId });
-      toast.success("Member removed successfully!");
+      toast.success("Участник удален");
     } catch (error) {
-      toast.error("Failed to remove member");
+      toast.error("ошибка удаления участника");
     }
   };
 
   const handleLeaveGroup = async () => {
     try {
       await leaveGroup({ groupId });
-      toast.success("Left group successfully!");
+      toast.success("Вы вышли из группы");
       onClose();
     } catch (error) {
-      toast.error("Failed to leave group");
+      toast.error("Ошибка выхода из группы");
     }
   };
 
@@ -57,12 +57,12 @@ export function GroupManagement({ groupId, groupName, onClose }: GroupManagement
     <div className="flex flex-col h-full bg-white dark:bg-gray-900">
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Manage "{groupName}"</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Группа "{groupName}"</h2>
           <button
             onClick={onClose}
             className="px-3 py-1 text-sm bg-gray-500 text-white rounded hover:bg-gray-600"
           >
-            Close
+            х
           </button>
         </div>
 
@@ -75,7 +75,7 @@ export function GroupManagement({ groupId, groupName, onClose }: GroupManagement
                 : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
             }`}
           >
-            Members ({filteredMembers.length})
+            Участники ({filteredMembers.length})
           </button>
           {isAdmin && (
             <button
@@ -86,7 +86,7 @@ export function GroupManagement({ groupId, groupName, onClose }: GroupManagement
                   : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
               }`}
             >
-              Add Friends ({filteredFriends.length})
+              Добавить друзей ({filteredFriends.length})
             </button>
           )}
         </div>
@@ -96,7 +96,7 @@ export function GroupManagement({ groupId, groupName, onClose }: GroupManagement
             onClick={handleLeaveGroup}
             className="w-full px-3 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600"
           >
-            Leave Group
+            Покинуть группу
           </button>
         )}
       </div>
@@ -123,13 +123,13 @@ export function GroupManagement({ groupId, groupName, onClose }: GroupManagement
                       {member.nickname || member.name || member.email}
                       {member.role === "admin" && (
                         <span className="ml-2 px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded">
-                          Admin
+                          Создатель
                         </span>
                       )}
                     </div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">{member.email}</div>
                     <div className="text-xs text-gray-400 dark:text-gray-500">
-                      Joined {new Date(member.joinedAt).toLocaleDateString()}
+                      Присоединился {new Date(member.joinedAt).toLocaleDateString()}
                     </div>
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export function GroupManagement({ groupId, groupName, onClose }: GroupManagement
                     onClick={() => handleRemoveMember(member._id)}
                     className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
                   >
-                    Remove
+                    Удалить
                   </button>
                 )}
               </div>
@@ -171,13 +171,13 @@ export function GroupManagement({ groupId, groupName, onClose }: GroupManagement
                   onClick={() => handleAddMember(friend._id)}
                   className="px-3 py-1 text-sm bg-green-500 text-white rounded hover:bg-green-600"
                 >
-                  Add to Group
+                  Добавить
                 </button>
               </div>
             ))}
             {filteredFriends.length === 0 && (
               <div className="text-center text-gray-500 dark:text-gray-400 py-8">
-                No friends available to add
+                Нет кого добавлять
               </div>
             )}
           </div>

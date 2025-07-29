@@ -158,10 +158,10 @@ export const deleteMessage = mutation({
     if (!userId) throw new Error("Not authenticated");
 
     const message = await ctx.db.get(args.messageId);
-    if (!message) throw new Error("Message not found");
+    if (!message) throw new Error("Сообщение не найдено");
 
     if (message.authorId !== userId) {
-      throw new Error("Can only delete your own messages");
+      throw new Error("Можно удалить только свои сообщения");
     }
 
     await ctx.db.patch(args.messageId, { 
@@ -187,7 +187,7 @@ export const getGroupMessages = query({
       .first();
 
     if (!membership) {
-      throw new Error("Not a member of this group");
+      throw new Error("Не часть группы");
     }
 
     const messages = await ctx.db
@@ -221,7 +221,7 @@ export const getGroupMessages = query({
               .first();
             replyTo = {
               content: replyMessage.content,
-              author: replyProfile?.nickname || replyAuthor?.name || "Unknown",
+              author: replyProfile?.nickname || replyAuthor?.name,
             };
           }
         }
@@ -230,7 +230,7 @@ export const getGroupMessages = query({
           ...message,
           author: {
             _id: author?._id,
-            name: authorProfile?.nickname || author?.name || "Unknown",
+            name: authorProfile?.nickname || author?.name || "ноунейм",
           },
           fileUrl,
           replyTo,
@@ -290,7 +290,7 @@ export const getDirectMessages = query({
               .first();
             replyTo = {
               content: replyMessage.content,
-              author: replyProfile?.nickname || replyAuthor?.name || "Unknown",
+              author: replyProfile?.nickname || replyAuthor?.name || "ноунейм",
             };
           }
         }
@@ -299,7 +299,7 @@ export const getDirectMessages = query({
           ...message,
           author: {
             _id: author?._id,
-            name: authorProfile?.nickname || author?.name || "Unknown",
+            name: authorProfile?.nickname || author?.name || "ноунейм",
           },
           fileUrl,
           replyTo,

@@ -57,7 +57,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
           content: message,
         });
         setEditingMessage(null);
-        toast.success("Message updated!");
+        toast.success("Сообщение отправлено!");
       } else {
         const args = {
           content: message,
@@ -73,7 +73,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
       }
       setMessage("");
     } catch (error) {
-      toast.error(editingMessage ? "Failed to edit message" : "Failed to send message");
+      toast.error(editingMessage ? "Не удалось изменить" : "Не удалось отправить");
     }
   };
 
@@ -83,7 +83,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
 
     const allowedTypes = ["image/jpeg", "image/png", "image/jpg", "image/gif"];
     if (!allowedTypes.includes(file.type)) {
-      toast.error("Only JPEG, PNG, JPG, and GIF files are allowed");
+      toast.error("только файлы формата JPEG, PNG, JPG, и GIF");
       return;
     }
 
@@ -97,7 +97,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
       });
 
       if (!result.ok) {
-        throw new Error("Upload failed");
+        throw new Error("не удалось отправить");
       }
 
       const { storageId } = await result.json();
@@ -113,9 +113,9 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
       };
 
       await sendFileMessage(args);
-      toast.success("File sent successfully!");
+      toast.success("Файл отправлен");
     } catch (error) {
-      toast.error("Failed to send file");
+      toast.error("Ошибка отправки файла");
     }
 
     if (fileInputRef.current) {
@@ -126,9 +126,9 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
   const handleDeleteMessage = async (messageId: Id<"messages">) => {
     try {
       await deleteMessage({ messageId });
-      toast.success("Message deleted");
+      toast.success("Сообщение удалено");
     } catch (error) {
-      toast.error("Failed to delete message");
+      toast.error("Не удалось удалить сообщение");
     }
   };
 
@@ -159,7 +159,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
           <div key={msg._id} className="group">
             {msg.replyTo && (
               <div className="ml-4 mb-1 p-2 bg-gray-100 dark:bg-gray-700 rounded text-sm border-l-2 border-gray-300 dark:border-gray-600">
-                <div className="text-xs text-gray-600 dark:text-gray-400">Replying to {msg.replyTo.author}</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400">Ответ {msg.replyTo.author}</div>
                 <div className="text-gray-700 dark:text-gray-300">{msg.replyTo.content}</div>
               </div>
             )}
@@ -175,7 +175,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
                 )}
                 
                 {msg.isDeleted ? (
-                  <div className="italic text-gray-500 dark:text-gray-400">Message deleted</div>
+                  <div className="italic text-gray-500 dark:text-gray-400">Сообщение удалено</div>
                 ) : msg.type === "file" && msg.fileUrl ? (
                   <div>
                     <img 
@@ -191,7 +191,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
                 
                 <div className="text-xs mt-1 opacity-70 flex justify-between items-center">
                   <span>{new Date(msg._creationTime).toLocaleTimeString()}</span>
-                  {msg.editedAt && <span className="italic">edited</span>}
+                  {msg.editedAt && <span className="italic">изменено</span>}
                 </div>
               </div>
               
@@ -201,21 +201,21 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
                     onClick={() => handleReply(msg._id, msg.content || "File", msg.author.name)}
                     className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
                   >
-                    Reply
+                    Ответить
                   </button>
                   {msg.type === "text" && (
                     <button
                       onClick={() => handleEdit(msg._id, msg.content || "")}
                       className="text-xs text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
                     >
-                      Edit
+                      Изменить
                     </button>
                   )}
                   <button
                     onClick={() => handleDeleteMessage(msg._id)}
                     className="text-xs text-red-500 hover:text-red-700"
                   >
-                    Delete
+                    Удалить
                   </button>
                 </div>
               )}
@@ -226,7 +226,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
                     onClick={() => handleReply(msg._id, msg.content || "File", msg.author.name)}
                     className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
                   >
-                    Reply
+                    Ответить
                   </button>
                 </div>
               )}
@@ -241,7 +241,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
           <div className="mb-2 p-2 bg-gray-100 dark:bg-gray-700 rounded text-sm border-l-2 border-blue-500">
             <div className="flex justify-between items-start">
               <div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">Replying to {replyingTo.author}</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400">Ответ {replyingTo.author}</div>
                 <div className="text-gray-700 dark:text-gray-300">{replyingTo.content}</div>
               </div>
               <button
@@ -257,7 +257,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
         {editingMessage && (
           <div className="mb-2 p-2 bg-yellow-100 dark:bg-yellow-900 rounded text-sm border-l-2 border-yellow-500">
             <div className="flex justify-between items-start">
-              <div className="text-yellow-800 dark:text-yellow-200">Editing message</div>
+              <div className="text-yellow-800 dark:text-yellow-200">Изменить сообщение</div>
               <button
                 onClick={cancelEdit}
                 className="text-yellow-600 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-200"
@@ -273,7 +273,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder={editingMessage ? "Edit message..." : "Type a message..."}
+            placeholder={editingMessage ? "Изменить сообщение..." : "Написать сообщение..."}
             className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
           />
           
@@ -302,7 +302,7 @@ export function ChatWindow({ activeChat, currentUser }: ChatWindowProps) {
             disabled={!message.trim()}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {editingMessage ? "Update" : "Send"}
+            {editingMessage ? "Изменить" : "Отправить"}
           </button>
         </form>
       </div>
